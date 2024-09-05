@@ -1,0 +1,79 @@
+﻿@model AnimalesMVC.Models.AnimalViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <li type="button" class="btn btn-outline-primary">
+        @Html.ActionLink("Create New", "Create")
+    </li>
+</p>
+<form asp-controller="Estudiantes" asp-action="Index" method="get">
+@Html.LabelFor(model => model.SearchString, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+    @Html.EditorFor(model => model.SearchString, new { HtmlAttributes = new { @class = "form-control", @placeholder = "Ingrese el valor a buscar" } })
+    @Html.ValidationMessageFor(model => model.SearchString, "", new { @class = "text-danger" })
+</div>
+<br />
+<input type="submit" class="btn btn-outline-success" />
+<br />
+</form>
+<br />
+<table class="table text-white">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Animales[0].Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Animales[0].Raza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Animales[0].Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Animales[0].Tamaño)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Animales[0].FechaNacimiento)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Animales)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Raza)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tamaño)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+
+                <li type="button" class="btn btn-outline-success">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AnimalId })
+                </li> |
+                <li type="button" class="btn btn-outline-info">
+                    @Html.ActionLink("Details", "Details", new { id = item.AnimalId })
+                </li>|
+                <li type="button" class="btn btn-outline-danger">
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.AnimalId })
+                </li>
+            </td>
+        </tr>
+    }
+
+</table>
